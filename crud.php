@@ -1,7 +1,8 @@
-<?
+<?php
 interface Crud{
+
     public function save();
-    public function readAll();
+    public static function readAll();
     public function readUnique();
     public function search();
     public function update();

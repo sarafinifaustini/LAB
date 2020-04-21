@@ -1,7 +1,7 @@
 <?php
 include_once 'DBConnector.php';
 include_once 'user.php';
-include 'crud.php';
+
 
 $connection = new DBConnector;
 if( isset($_POST['btn-save'])){
@@ -10,13 +10,14 @@ if( isset($_POST['btn-save'])){
     $city = $_POST['city_name'];
 
     $user = new User($first_name,$last_name,$city);
-    $res = $user->save();
+    $res = $user->save($connection->connection);
     if($res){
         echo "Save Operation was successful";
     }else{
         echo"An error occured!";
     }
 }
+$connection->closeDatabase();
 ?>
 <html lang="en">
 <head>
@@ -25,8 +26,8 @@ if( isset($_POST['btn-save'])){
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
-        <table>
+    <form action="" method="post">
+        <table >
             <tr>
             <td><input type="text" name="first_name" required placeholder="First Name"/></td>
             </tr>
@@ -42,4 +43,5 @@ if( isset($_POST['btn-save'])){
         </table>
     </form>
 </body>
+<!-- <a href="view.php">Show all records</a> -->
 </html>
