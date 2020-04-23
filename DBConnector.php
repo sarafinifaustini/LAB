@@ -1,21 +1,26 @@
-<?php
-define('DB_SERVER','localhost');
-define('DB_USER','root');
-define('DB_PASS', '');
-define('DB','btc3205');
+<?php 
+ error_reporting(E_ALL ^ E_WARNING); 
+ define('DB_SERVER', 'localhost');
+ define('DB_USER', 'root');
+ define('DB_PASS', '');
+ define('DB_NAME', 'btc3205');
 
-class DBConnector{
-    public $connection;
-    
-    function __constructor(){
-        $connection = new mysqli(DB_SERVER,DB_USER,DB_PASS,DB);
-        if ($connection->connect_error) {
-            die("Connection failed: " . $connection->connect_error);
-        }
-          mysqli_select_db($this->connection,DB) ;
-    }
-    public function closeDatabase(){
-        mysqli_close($this->connection);
-    }
-}
- 
+ /**
+  *
+  */
+ class DBConnector
+ {
+   public $conn;
+
+   function __construct()
+   {
+     $this->conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS) or die("Error: ".mysqli_error());
+     // var_dump($this->conn);
+     // die();
+     mysqli_select_db($this->conn, DB_NAME);
+   }
+
+   public function closeDatabase(){
+     mysqli_close($this->conn);
+   }
+ }

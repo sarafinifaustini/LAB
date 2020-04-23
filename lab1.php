@@ -1,47 +1,45 @@
 <?php
-include_once 'DBConnector.php';
-include_once 'user.php';
+// error_reporting(E_ALL ^ E_WARNING); 
+  include_once 'DBConnector.php';
+  include_once 'user.php';
+  $con = new DBConnector;
 
-
-$connection = new DBConnector;
-if( isset($_POST['btn-save'])){
+  if (isset($_POST['btn-save'])) {
     $first_name = $_POST['first_name'];
     $last_name = $_POST['last_name'];
     $city = $_POST['city_name'];
 
-    $user = new User($first_name,$last_name,$city);
-    $res = $user->save($connection->connection);
-    if($res){
-        echo "Save Operation was successful";
-    }else{
-        echo"An error occured!";
+    $user = new User($first_name, $last_name, $city);
+    $res = $user->save($con->conn);
+
+    if ($res) {
+      echo "Save operation successful!";
+    } else {
+      echo "An error occurred!";
     }
-}
-$connection->closeDatabase();
+  }
 ?>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form action="" method="post">
-        <table >
+<html>
+  <head>
+      <body>
+        <form method="post" action="lab1.php">
+          <table align="center">
             <tr>
-            <td><input type="text" name="first_name" required placeholder="First Name"/></td>
+              <td><input type="text" name="first_name" placeholder="First Name" required/></td>
             </tr>
             <tr>
-            <td><input type="text" name="last_name" placeholder="Last Name"/></td>
+              <td><input type="text" name="last_name" placeholder="Last Name" required/></td>
             </tr>
             <tr>
-            <td><input type="text" name="city_name" placeholder="City"/></td>
+              <td><input type="text" name="city_name" placeholder="City" required/></td>
             </tr>
             <tr>
-                <td><button type="submit" name="btm-save"><strong>SAVE</strong></button></td>
+              <td><button type="submit" name="btn-save"><strong>SAVE</strong></button></td>
             </tr>
-        </table>
-    </form>
-</body>
-<!-- <a href="view.php">Show all records</a> -->
+          </table>
+        </form>
+      </body>
+      <a href="all.php">View All Records</a>
+  </head>
+
 </html>
