@@ -1,5 +1,5 @@
 <?php 
- error_reporting(E_ALL ^ E_WARNING); 
+//  error_reporting(E_ALL ^ E_WARNING); 
  define('DB_SERVER', 'localhost');
  define('DB_USER', 'root');
  define('DB_PASS', '');
@@ -14,10 +14,11 @@
 
    function __construct()
    {
-     $this->conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS) or die("Error: ".mysqli_error());
-     // var_dump($this->conn);
-     // die();
+     $this->conn = mysqli_connect(DB_SERVER, DB_USER, DB_PASS) or die("Error: ".mysqli_error($this->conn));
      mysqli_select_db($this->conn, DB_NAME);
+
+
+
    }
 
    public function closeDatabase(){
