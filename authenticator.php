@@ -1,5 +1,5 @@
 <?php
-interface Authenticator{
+interface Authenticator {
     public function hashPassword();
     public static function isPasswordCorrect($username, $password);
     public function login();
